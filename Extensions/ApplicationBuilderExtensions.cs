@@ -9,4 +9,10 @@ public static class ApplicationBuilderExtensions
         app.UseMiddleware<RequestLoggingMiddleware>();
         return app;
     }
+
+    public static IApplicationBuilder UseExceptionHandling(this IApplicationBuilder app)
+    {
+        app.UseMiddleware<ExceptionHandlingMiddleware>();
+        return app;
+    }
 }

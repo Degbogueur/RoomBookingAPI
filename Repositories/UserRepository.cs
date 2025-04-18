@@ -2,6 +2,7 @@
 using RoomBookingAPI.Contracts.Repositories;
 using RoomBookingAPI.Data;
 using RoomBookingAPI.DTOs.User;
+using RoomBookingAPI.Exceptions;
 using RoomBookingAPI.Mappers;
 
 namespace RoomBookingAPI.Repositories;
@@ -22,7 +23,7 @@ public class UserRepository(
     public async Task DeleteAsync(int id)
     {
         var user = await _context.Users.FindAsync(id)
-            ?? throw new ArgumentNullException($"User with ID {id} not found.");
+            ?? throw new NotFoundException(id);
 
         _context.Users.Remove(user);
         await _context.SaveChangesAsync();
@@ -46,7 +47,7 @@ public class UserRepository(
     public async Task UpdateAsync(int id, UpdateUserDto userDto)
     {
         var existingUser = await _context.Users.FindAsync(id)
-            ?? throw new ArgumentNullException($"User with ID {id} not found.");
+            ?? throw new NotFoundException(id);
 
         var updatedUser = userDto.ToModel(id);
         _context.Entry(existingUser).CurrentValues.SetValues(updatedUser);

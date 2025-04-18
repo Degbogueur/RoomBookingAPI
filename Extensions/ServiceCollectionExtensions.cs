@@ -2,7 +2,6 @@
 using RoomBookingAPI.Contracts.Repositories;
 using RoomBookingAPI.Contracts.Services;
 using RoomBookingAPI.Data;
-using RoomBookingAPI.ExceptionHandlers;
 using RoomBookingAPI.Repositories;
 using RoomBookingAPI.Services;
 
