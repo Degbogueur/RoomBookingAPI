@@ -2,6 +2,7 @@
 using RoomBookingAPI.Contracts.Repositories;
 using RoomBookingAPI.Contracts.Services;
 using RoomBookingAPI.Data;
+using RoomBookingAPI.Exceptions.Handlers;
 using RoomBookingAPI.Repositories;
 using RoomBookingAPI.Services;
 
@@ -30,6 +31,12 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped<IRoomService, RoomService>();
         services.AddScoped<IBookingService, BookingService>();
+        return services;
+    }
+
+    public static IServiceCollection AddExceptionHandlers(this IServiceCollection services)
+    {
+        services.AddExceptionHandler<GlobalExceptionHandler>();
         return services;
     }
 }

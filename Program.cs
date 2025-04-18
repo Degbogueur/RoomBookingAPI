@@ -6,6 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDatabase(builder.Configuration);
 builder.Services.AddRepositories();
 builder.Services.AddServices();
+builder.Services.AddExceptionHandlers();
+builder.Services.AddProblemDetails();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -24,7 +26,11 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseRequestLogging();
-app.UseExceptionHandling();
+
+// Remove comment to use ExceptionHandlingMiddleware for exceptions handling
+//app.UseExceptionHandling();
+
+app.UseExceptionHandler();
 
 app.UseAuthorization();
 
